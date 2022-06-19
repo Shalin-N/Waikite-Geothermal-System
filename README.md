@@ -187,7 +187,7 @@ i.	0.0288 bar
 <br>iv.	0.0384 bar				  	
 
 The final temperatures for each scenario are:
-i. 	145.11 °C
+<br>i. 	145.11 °C
 <br>ii.	146.13 °C
 <br>iii.	144.095 °C
 <br>iv.	145.62 °C
