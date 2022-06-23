@@ -10,7 +10,8 @@ You should undertake a computer modelling study that will assist decision-making
 # Code
 Following list of files can be found in the ***code*** folder. All diagrams will be produced when the ***main.py*** script is ran. Every other folders are irrelevant for the assessment of our project. ***pressure.py*** and ***temperature.py*** python scripts are called within ***main.py*** python script and are used for calculations. ***tests.py*** is used for unit testing. 
 
-# 1. Why?
+# Report
+## 1. Why?
 Rotorua city was built atop the Rotorua geothermal system, and for decades its residents drilled shallow bores to use free hot water for heating and bathing. Over time though, the exploitation of this field caused:
 - Pressure and groundwater level to decline
 -	Geysers supported by this system  to stop erupting, like the Waikite Geyser at Whakarewarewa
@@ -26,7 +27,7 @@ The RCC has proposed to continue the moratorium in its current form. The Tūhour
 -	The application is rejected, and the borehole operation must cease.
 -	The application is rejected, and the moratorium is lifted, allowing for additional boreholes.
 
-# 2.	How?
+## 2.	How?
 A computer modelling study can be used to understand how changes in operation (borehole extraction and cold water reinjection) affects the pressure and temperature, and surface features of a geothermal system. These insights could be used to model the economics (tourism) of the region, but that will be considered out of the scope of this study. 
 
 Tūhourangi Ngāti Wāhiao has retained us to perform a computer modelling study of the Rotorua Geothermal field and, subsequently, the Waikite Geyser. Our model aims to simulate how pressure and temperature in the system change in response to different levels of operation (borehole extraction and cold water reinjection). This model will predict reservoir pressure, temperature, and surface features for different operation rates.
@@ -39,7 +40,7 @@ The results from this modelling study will provide insight into:
 
 Previous studies suggest that surface features are negatively impacted when the reservoir pressure drops below 0.02 bar.
 
-# 3. Given?
+## 3. Given?
 The Rotorua Geothermal System can be modelled as a shallow or deep recharge model. Beneath Rotorua lake, there exist columns that allow cold water (10C) at constant hydrostatic pressure to flow into the geothermal system.
 
 A lumped parameter model can be used to conceptualise a geothermal reservoir as a single block. The pressure changes within the system in response to fluid extraction and inflow of adjacent groundwater (Fradkin, LJ, Storey, & McNabb, 1981). The temperature changes within the system according to cold water inflow and conduction. These can be represented as an ODE and are coupled together using pressure. 
@@ -75,7 +76,7 @@ Scott, B. J., Gordon, D. A., & Cody, A. D. (2005). Recovery of Rotorua geotherma
 
 Scott, B. J., Mroczek, E. K., Burnell, J. G., Zarroukc, S. J., Seward, A., Robson, B., & Graham, D. J. (2016). The Rotorua Geothermal Field: An experiment in environmental management. Geothermics 59, 294-310.
 
-# 4. Assume?
+## 4. Assume?
 The physics relevant to a geothermal system are:
 - Conservations of mass, which governs changes in fluid pressure. Fluid flow is by diffusion and is described by Darcy’s Law 
 -	Conservation of energy, which governs changes in fluid and rock temperature. Heat transfer is both advective (heat carried by moving fluid) and conductive (heat diffusing through rock). Conductive heat is described by Fourier’s Law
@@ -106,12 +107,12 @@ The effect of adjacent groundwater to the reservoir is included as a term in the
 Parameters:
 Specified in formulate
 
-# 5. Formulate?
+## 5. Formulate?
 ![image](https://user-images.githubusercontent.com/85419997/174466290-2f7e002d-c966-49ee-bd32-ffb68bab0385.png)
 
 ![image](https://user-images.githubusercontent.com/85419997/174466301-9a907b8e-12e5-4b58-9e4f-111492820bd3.png)
 
-# 6. Working?
+## 6. Working?
 We have checked that the Improved Euler implementation is working correctly by running a unit test that compares the output to a by-hand example. The code is given in test.py.
 
 We have benchmarked the numerical solution of the LPM against the analytical solution obtained for constant production rate. The results are shown below and indicate the solver is working as expected. For the temperature numerical solution, the rate of change is quicker, but they both stabilise at the same point. We also see evidence of instability for large time steps in both temperature and pressure. We can avoid this error by using a time step of 1.
@@ -122,7 +123,7 @@ We have benchmarked the numerical solution of the LPM against the analytical sol
 ![image](https://user-images.githubusercontent.com/85419997/174466331-92bd388d-cb34-46d4-879b-044832b8c7d3.png)
 <br><i>Figure 6: comparison of numerical solution to analytical (left) and plot of instability for time steps (right) fore pressure</i>
 
-# 7. Suitable?
+## 7. Suitable?
 I have calibrated the LPM model without slow drainage to the given data using curve_fit, which uses non-linear least squares to fit a function. The best fit model has pressure parameters a=110.366,   b=1,c=0 and temperature parameters a=4.189e-05,   b=0.086
 
 ![image](https://user-images.githubusercontent.com/85419997/174466352-77c930de-8c64-4e82-947e-f289b165d643.png)
@@ -137,7 +138,7 @@ This model does a good job of fitting the final pressure data but does not accur
 In regard to temperature:
 This model does a good job fitting the trend of temperature change and captures the increasing pressure, albeit a bit lower than the given data. The misfit is correlated in time and indicates the model’s departure from reality. This model has an average misfit of 1.5 °C. This misfit may be because we only have a small data set from 1984 to 2014 with measurements every five years. 
 
-# 8. Improve?
+## 8. Improve?
 Mass extraction and groundwater recharge are sufficient physics to describe the major trends in the data, but for the more subtle trends, some changes that may improve the model are:
 -	Inclusion of a slow drainage term in the LPM. 
 -	Inclusion of data from before 1984.
@@ -157,7 +158,7 @@ This model does a better job fitting all pressure data points and accurately mod
 In regard to temperature:
 This model does a similar job of fitting the trend of temperature change and captures the increasing pressure. The misfit is correlated in time and indicates the model’s departure from reality. This model has an average misfit of 1.5 °C, similar to the previous model. This misfit may be due to how seasons affect the temperature of cold-water inflow and conduction, which our model does not account for.
 
-# 9.	Use?
+## 9.	Use?
 We will use the model calibrated to parameters from section 8 to consider four “what-if” scenarios that will end in 2050.
 
 These are:
@@ -198,7 +199,7 @@ For all scenarios, the rate of change of pressure reaches a stable state. The st
 In regards to temperature:
 For all scenarios, the rate of change of temperature declines to a stable state scaled by the extraction rate. The stop & half current extraction scenarios see a steady increase in temperature. The maintained extraction scenario reaches a stable state. The double operation scenario initially increases but then begins to decline.
 
-# 10. Unknown?
+## 10. Unknown?
 There is uncertainty in the temperature and pressure data due to the missing data from 1950-1984, the variation in annual rainfall and temperatures associated with seasonal change. We approximated that the water level measurements had a standard deviation equal to yearly rainfall, and the temperature measurements had a standard deviation of 2 °C due to seasons temperature fluctuation. By minimising the sum of least squares of an error where sigma is equal to the standard deviations mentioned above, we can reasonably estimate the model parameters.
 
 We used the scipy method, curve_fit, from optimise that invokes a non-linear sum of least squares method to calibrate our model to the given data. Using the standard deviations mentioned above as our sigma value for curve_fit and bounds of [0, 0, -∞] to [∞, ∞, ∞] for pressure and no bounds for temperature, we generated our best-fit parameters and their respective covariance matrix according to the local minimum associated with the starting values of [0.15 0.12 0.6] for pressure and [0.000001, 0.08] for temperature. Then using the covariance matrix as an input to np.random.multivariate_normal, we obtained a set of 100 adequality fitting models that show the range of pressure and temperature values.
@@ -227,7 +228,7 @@ A more robust model would separate the cavities into smaller separate control vo
 
 Another shortcoming of our model is that extraction and injection rates are bundled into a single term. Separating these two rates into different terms would allow them to act independently of each other with varying parameter strengths, allowing for a better fit.
 
-# 11.	Recommend?
+## 11.	Recommend?
 The pressure and temperature change in the Rotorua Geothermal System have been modelled till 2050, subject to four different operation scenarios. Three of these scenarios (Halve, maintain, stop the current operation rate) maintained reservoir pressure above the 0.02 bar limit. Pressures below this limit have an adverse effect on surface features such as eruptions from the Waikite Geyser. The fourth scenario (double the current operation rate) drops the reservoir pressure to below 0 bar. 
 
 In regards to temperature, three of these scenarios (Halve, maintain, stop the current operation rate) continued to increase in temperature while the fourth scenario (double the current operation rate) see the temperature start to slowly decline, which could have an adverse effect on surface features such as eruptions from the Waikite Geyser.
