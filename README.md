@@ -4,10 +4,10 @@ You have been retained by Tūhourangi Ngāti Wāhiao to undertake a computer mod
 - Pressure and temperature monitoring data from near Whakarewarewa.
 - Reservoir engineering reports which indicate that the supply of hot water (rate and temperature) into the geysers has been disrupted but is recovering. The supply of cold water is unchanged.
 
-## Project expectations:
+# Project expectations:
 You should undertake a computer modelling study that will assist decision-making during the resource consent hearing, in particular addressing the noted concerns of other stakeholders where they are relevant to the study. The model you develop should be defensible, reflective of reality, and take appropriate account of uncertainty. You will be required to communicate the model findings in both oral and written formats.
 
-## Code
+# Code
 Following list of files can be found in the ***code*** folder. All diagrams will be produced when the ***main.py*** script is ran. Every other folders are irrelevant for the assessment of our project. ***pressure.py*** and ***temperature.py*** python scripts are called within ***main.py*** python script and are used for calculations. ***tests.py*** is used for unit testing. 
 
 # 1. Why?
